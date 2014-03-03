@@ -1,0 +1,4 @@
+name: ibtkm blog.
+description: sudo ln -s ~/personal_blog /var/www
+markdown: redcarpet
+pygments: true
