@@ -54,6 +54,13 @@ a:visited { color: #63c0f5; }
   font-size: 80%;
 }
 
+.post_title a {
+    color: #b5e853;
+}
+
+.comments {
+    background: white;
+}
 /*****************************************************************************/
 /*
 /* Site
