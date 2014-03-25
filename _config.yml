@@ -1,4 +1,4 @@
-name: ibtkm blog.
+name: py4_ blog.
 description: sudo ln -s ~/personal_blog /var/www
 markdown: redcarpet
 pygments: true
