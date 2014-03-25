@@ -2,7 +2,6 @@ name: ibtkm blog.
 description: sudo ln -s ~/personal_blog /var/www
 markdown: redcarpet
 pygments: true
-url: "http://py4.github.io"
 
 comments:
   disqus:
