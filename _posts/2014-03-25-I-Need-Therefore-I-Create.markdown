@@ -16,5 +16,5 @@ and here is where it begins. I love this common pattern. what pattern? this patt
 {% highlight text %}
 I needed so I created
 {% endhighlight %}
-It's the golden rule of geeks or even hackers. getting your hands dirty and solving your problem is a remarkable and valuable activity a computer geek or hacker can do. if you are a developer or a computer geek, your mission is to create new stuffs that people want and solve their problems or at least create new stuffs that you enjoy of and can be proud of.<br>whenever you see the codes, you say, hell yeah! I wrote those rubies.
+getting your hands dirty and solving your problem is a remarkable and valuable activity that you can do. You should create new stuffs that people want and solve their problems or at least create new stuffs that you enjoy of and can be proud of. whenever you see the codes, you say, hell yeah! I wrote those rubies.<br>
 <br>improve the computers' world and make people astonished by your creatures and your creativity. how? whenever you confront with an issue, try to solve it. 
