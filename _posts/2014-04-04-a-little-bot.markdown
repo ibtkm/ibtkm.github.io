@@ -9,6 +9,8 @@ many of you are movie geeks and are usually interested in some particular genres
 that I'm gonna talk about has happened to you undoubtedly. you have a bunch of movies in a directory and now you wanna watch one but you don't know them all. thus, you decide to go to imdb and start to search the titles one by one. gazed to the screen, you start to read about genres, score and description and at the end you choose one. seems ok. today, as a result of not having enough of fun, I defined a little challenge for my self: automating this process through an imdb bot.<br>
 I didn't find the imdb's REST api so I did the process through web interactions.
 I wrote a little script in Ruby language with the help of our friend, "nokogiri" gem to handle the html parsing. you can get it through its <a href="http://github.com/py4/mifb">github page</a>. <br>
+here is a screenshot of what it brings for you: <br>
+<img src="http://ubuntuone.com/4pRtSgL6PQSxDCIg9qJV7W" width="750px" height="300px">
 here is the source: <br>
 {% highlight ruby %}
 require 'nokogiri'
