@@ -5,6 +5,7 @@
 /*****************************************************************************/
 
 /* Global Reset */
+
 * {
   margin: 0;
   padding: 0;
@@ -169,14 +170,14 @@ a:visited { color: #63c0f5; }
   margin-left: 1.35em;
 }
 
-.post code {
+/*.post code {
   background-color: black;
   padding: 0 .2em;
 }
 
 .post pre code {
   border: none;
-}
+}*/
 
 /* terminal */
 .post pre.terminal {
@@ -185,6 +186,6 @@ a:visited { color: #63c0f5; }
   color: #FFF;
 }
 
-.post pre.terminal code {
+/* .post pre.terminal code {
   background-color: #333;
-}
+} */

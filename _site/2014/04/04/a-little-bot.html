@@ -11,7 +11,8 @@
 
         <!-- Custom CSS -->
         <link rel="stylesheet" href="/css/main.css">
-
+        <link href='http://fonts.googleapis.com/css?family=PT+Serif' rel='stylesheet' type='text/css'>
+        <link href="prism.css" rel="stylesheet" type="text/css">
     </head>
     <body>
 
@@ -31,33 +32,33 @@ I didn&#39;t find the imdb&#39;s REST api so I did the process through web inter
 I wrote a little script in Ruby language with the help of our friend, &quot;nokogiri&quot; gem to handle the html parsing. you can get it through its <a href="http://github.com/py4/mifb">github page</a>. <br>
 here is a screenshot of what it brings for you: <br>
 <img src="http://ubuntuone.com/4pRtSgL6PQSxDCIg9qJV7W" width="750px" height="300px">
-here is the source: <br></p>
-
-<div class="highlight"><pre><code class="ruby"><span class="nb">require</span> <span class="s1">&#39;nokogiri&#39;</span>
-<span class="nb">require</span> <span class="s1">&#39;open-uri&#39;</span>
-<span class="nb">require</span> <span class="s1">&#39;colorize&#39;</span>
-<span class="n">blacklist</span> <span class="o">=</span> <span class="o">[</span><span class="s2">&quot;dvdrip&quot;</span><span class="p">,</span><span class="s2">&quot;xvid&quot;</span><span class="p">,</span><span class="s2">&quot;maxspeed&quot;</span><span class="p">,</span><span class="s2">&quot;720p&quot;</span><span class="p">,</span><span class="s2">&quot;hd&quot;</span><span class="o">]</span>
-<span class="nb">puts</span> <span class="s2">&quot;Enter the directory: &quot;</span>
-<span class="n">dir_addr</span> <span class="o">=</span> <span class="nb">gets</span><span class="o">.</span><span class="n">chomp</span>
-<span class="n">names</span> <span class="o">=</span> <span class="no">Dir</span><span class="o">.</span><span class="n">entries</span><span class="p">(</span><span class="n">dir_addr</span><span class="p">)</span><span class="o">.</span><span class="n">reject</span> <span class="p">{</span> <span class="o">|</span><span class="nb">name</span><span class="o">|</span> <span class="nb">name</span> <span class="o">==</span> <span class="s2">&quot;.&quot;</span> <span class="ow">or</span> <span class="nb">name</span> <span class="o">==</span> <span class="s2">&quot;..&quot;</span> <span class="p">}</span>
-<span class="n">names</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="nb">name</span><span class="o">|</span>
-    <span class="nb">name</span><span class="o">.</span><span class="n">downcase!</span>
-    <span class="n">blacklist</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span> <span class="o">|</span><span class="n">black_name</span><span class="o">|</span> <span class="nb">name</span><span class="o">.</span><span class="n">gsub!</span><span class="p">(</span><span class="n">black_name</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="k">if</span> <span class="nb">name</span><span class="o">.</span><span class="n">include?</span> <span class="n">black_name</span> <span class="p">}</span>
-    <span class="nb">name</span> <span class="o">=</span> <span class="nb">name</span><span class="o">.</span><span class="n">gsub</span><span class="p">(</span><span class="sr">/[^A-Za-z\s]/</span><span class="p">,</span><span class="s1">&#39; &#39;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="o">.</span><span class="n">gsub</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span><span class="s2">&quot;+&quot;</span><span class="p">)</span>
-    <span class="n">doc</span> <span class="o">=</span> <span class="no">Nokogiri</span><span class="o">::</span><span class="no">HTML</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s2">&quot;http://www.imdb.com/find?q=</span><span class="si">#{</span><span class="nb">name</span><span class="si">}</span><span class="s2">&amp;s=all&quot;</span><span class="p">))</span>
-    <span class="n">section</span> <span class="o">=</span> <span class="n">doc</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s2">&quot;div.findSection&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">select</span> <span class="p">{</span> <span class="o">|</span><span class="n">section</span><span class="o">|</span> <span class="n">section</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s2">&quot;h3.findSectionHeader&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span> <span class="o">==</span> <span class="s2">&quot;Titles&quot;</span> <span class="p">}</span><span class="o">.</span><span class="n">first</span>
-    <span class="n">relative_url</span> <span class="o">=</span> <span class="n">section</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s2">&quot;table.findList&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s2">&quot;tr&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s2">&quot;td.result_text&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s2">&quot;href&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
-    <span class="n">doc</span> <span class="o">=</span> <span class="no">Nokogiri</span><span class="o">::</span><span class="no">HTML</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s2">&quot;http://www.imdb.com</span><span class="si">#{</span><span class="n">relative_url</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">))</span>
-    <span class="nb">puts</span> <span class="s2">&quot;&gt;&gt;&gt; </span><span class="si">#{</span><span class="n">doc</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s2">&quot;h1.header&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s2">&quot;span.itemprop&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="si">}</span><span class="s2"> &lt;&lt;&lt;&quot;</span><span class="o">.</span><span class="n">red</span>
-    <span class="nb">print</span> <span class="s2">&quot;genre: &quot;</span><span class="o">.</span><span class="n">green</span>
-    <span class="nb">print</span> <span class="n">doc</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s2">&quot;div.infobar&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s2">&quot;span.itemprop&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">map</span> <span class="p">{</span> <span class="o">|</span><span class="n">item</span><span class="o">|</span> <span class="n">item</span><span class="o">.</span><span class="n">text</span> <span class="p">}</span>
-    <span class="nb">print</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
-    <span class="nb">print</span> <span class="s2">&quot;rating: &quot;</span><span class="o">.</span><span class="n">green</span>
-    <span class="nb">puts</span> <span class="n">doc</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s2">&quot;div.star-box-giga-star&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
-    <span class="nb">print</span> <span class="s2">&quot;description: &quot;</span><span class="o">.</span><span class="n">green</span>
-    <span class="nb">puts</span> <span class="n">doc</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s2">&quot;td#overview-top&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s2">&quot;p&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">select</span> <span class="p">{</span> <span class="o">|</span><span class="nb">p</span><span class="o">|</span> <span class="nb">p</span><span class="o">.</span><span class="n">attributes</span><span class="o">[</span><span class="s2">&quot;itemprop&quot;</span><span class="o">]</span> <span class="ow">and</span> <span class="nb">p</span><span class="o">.</span><span class="n">attributes</span><span class="o">[</span><span class="s2">&quot;itemprop&quot;</span><span class="o">].</span><span class="n">value</span> <span class="o">==</span> <span class="s2">&quot;description&quot;</span> <span class="p">}</span><span class="o">.</span><span class="n">first</span><span class="o">.</span><span class="n">text</span>
-<span class="k">end</span>
-</code></pre></div>
+here is the source: <br>
+<div>
+  <pre data-line=''><code class='language-ruby'>require &#39;nokogiri&#39;
+require &#39;open-uri&#39;
+require &#39;colorize&#39;
+blacklist = [&quot;dvdrip&quot;,&quot;xvid&quot;,&quot;maxspeed&quot;,&quot;720p&quot;,&quot;hd&quot;]
+puts &quot;Enter the directory: &quot;
+dir<em>addr = gets.chomp
+names = Dir.entries(dir</em>addr).reject { |name| name == &quot;.&quot; or name == &quot;..&quot; }
+names.each do |name|
+    name.downcase!
+    blacklist.each { |black<em>name| name.gsub!(black</em>name,&#39;&#39;) if name.include? black<em>name }
+    name = name.gsub(/[^A-Za-z\s]/,&#39; &#39;).strip.gsub(&quot; &quot;,&quot;+&quot;)
+    doc = Nokogiri::HTML(open(&quot;http://www.imdb.com/find?q=#{name}&amp;s=all&quot;))
+    section = doc.css(&quot;div.findSection&quot;).select { |section| section.css(&quot;h3.findSectionHeader&quot;).text == &quot;Titles&quot; }.first
+    relative</em>url = section.css(&quot;table.findList&quot;).css(&quot;tr&quot;).first.css(&quot;td.result<em>text&quot;).css(&quot;a&quot;).attr(&quot;href&quot;).text
+    doc = Nokogiri::HTML(open(&quot;http://www.imdb.com#{relative</em>url}&quot;))
+    puts &quot;&gt;&gt;&gt; #{doc.css(&quot;h1.header&quot;).css(&quot;span.itemprop&quot;).text} &lt;&lt;&lt;&quot;.red
+    print &quot;genre: &quot;.green
+    print doc.css(&quot;div.infobar&quot;).css(&quot;span.itemprop&quot;).map { |item| item.text }
+    print &quot;\n&quot;
+    print &quot;rating: &quot;.green
+    puts doc.css(&quot;div.star-box-giga-star&quot;).text
+    print &quot;description: &quot;.green
+    puts doc.css(&quot;td#overview-top&quot;).css(&quot;p&quot;).select { |p| p.attributes[&quot;itemprop&quot;] and p.attributes[&quot;itemprop&quot;].value == &quot;description&quot; }.first.text
+end</code></pre>
+</div></p>
 
 <p>Your comments and suggestions are welcome.</p>
 
@@ -92,5 +93,6 @@ here is the source: <br></p>
           </div>
         </div>
 
+        <script src="prism.js"></script>
     </body>
 </html>

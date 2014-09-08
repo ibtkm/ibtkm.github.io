@@ -12,7 +12,7 @@ I wrote a little script in Ruby language with the help of our friend, "nokogiri"
 here is a screenshot of what it brings for you: <br>
 <img src="http://ubuntuone.com/4pRtSgL6PQSxDCIg9qJV7W" width="750px" height="300px">
 here is the source: <br>
-{% highlight ruby %}
+{% prism ruby %}
 require 'nokogiri'
 require 'open-uri'
 require 'colorize'
@@ -37,6 +37,6 @@ names.each do |name|
     print "description: ".green
     puts doc.css("td#overview-top").css("p").select { |p| p.attributes["itemprop"] and p.attributes["itemprop"].value == "description" }.first.text
 end
-{% endhighlight %}
+{% endprism %}
 Your comments and suggestions are welcome.
 
