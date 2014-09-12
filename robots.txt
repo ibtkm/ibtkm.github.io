@@ -1,0 +1,3 @@
+User-agent: *
+Disallow:
+Sitemap: http://py4.ir/fa/sitemap.xml
