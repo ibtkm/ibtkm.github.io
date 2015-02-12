@@ -1,9 +1,0 @@
-name: py4_ blog.
-description: sudo ln -s ~/personal_blog /var/www
-markdown: redcarpet
-pygments: true
-
-comments:
-  disqus:
-    short_name: jekyll_blog
-    api_key: 0H2AXutwbpvvscKSg26DYapUSnlIIEQDZaEwxhsge2O9Slo2yGzQH6uSwqpTsWmf
