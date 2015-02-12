@@ -1,0 +1,63 @@
+body {
+	font-family: 'Droid Sans', 'Droid Arabic Naskh', sans-serif;
+	font-style: normal;
+	background-color: #002800;
+	color: white;
+}
+
+.title {
+	color: rgba(234, 255, 33, 1);
+	font-weight: bold;
+}
+
+.bracet {
+	color: rgba(27, 254, 206, 1);
+}
+
+a {
+	text-decoration: none;
+}
+
+a:link {
+	color: rgba(32, 243, 221, 1);
+}
+
+a:hover {
+	color: rgba(2, 123, 110, 1);
+}
+
+a:visited {
+	color: rgba(32, 243, 221, 1);
+	/*color: rgba(2, 123, 110, 1);*/
+}
+
+a:visited:hover {
+	color: rgba(2, 123, 110, 1);
+}
+
+.email {
+	background: black;
+	padding-right: 5px;
+	padding-left: 5px;
+	padding-bottom: 3px;
+	padding-top: 2px;
+}
+
+.name {
+	font-weight: bold;
+	font-size: 30px;
+	color: #2DA4B3;
+}
+
+.avatar {
+	margin-right: 300px;
+}
+
+.div-text {
+	width: 600px;
+}
+
+.bio {
+	color: rgba(45, 164, 179, 1);
+	font-size: 15px;
+}
